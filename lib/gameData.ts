@@ -925,12 +925,11 @@ export const PUZZLES: Puzzle[] = [
     date: "2026-03-11",
     startPlayer: PLAYERS["aaron-judge"],
     endPlayer: PLAYERS["manny-ramirez"],
-    par: 3,
+    par: 2,
     optimalPath: [
       "Aaron Judge",
       "Jacoby Ellsbury",
       "David Ortiz",
-      "Manny Ramirez",
     ],
   },
   {
@@ -938,12 +937,11 @@ export const PUZZLES: Puzzle[] = [
     date: "2026-03-12",
     startPlayer: PLAYERS["mike-trout"],
     endPlayer: PLAYERS["ken-griffey-jr"],
-    par: 3,
+    par: 2,
     optimalPath: [
       "Mike Trout",
       "Josh Hamilton",
       "Adrian Beltre",
-      "Ken Griffey Jr.",
     ],
   },
   {
@@ -951,12 +949,11 @@ export const PUZZLES: Puzzle[] = [
     date: "2026-03-13",
     startPlayer: PLAYERS["randy-johnson"],
     endPlayer: PLAYERS["gerrit-cole"],
-    par: 3,
+    par: 2,
     optimalPath: [
       "Randy Johnson",
       "Derek Jeter",
       "Masahiro Tanaka",
-      "Gerrit Cole",
     ],
   },
   {
@@ -964,14 +961,13 @@ export const PUZZLES: Puzzle[] = [
     date: "2026-03-14",
     startPlayer: PLAYERS["pete-rose"],
     endPlayer: PLAYERS["bryce-harper"],
-    par: 5,
+    par: 4,
     optimalPath: [
       "Pete Rose",
       "Eric Davis",
       "Barry Larkin",
       "Jose Guillen",
       "Ryan Zimmerman",
-      "Bryce Harper",
     ],
   },
   {
@@ -979,12 +975,11 @@ export const PUZZLES: Puzzle[] = [
     date: "2026-03-15",
     startPlayer: PLAYERS["nolan-ryan"],
     endPlayer: PLAYERS["clayton-kershaw"],
-    par: 3,
+    par: 2,
     optimalPath: [
       "Nolan Ryan",
       "Ivan Rodriguez",
       "Jayson Werth",
-      "Clayton Kershaw",
     ],
   },
 ];

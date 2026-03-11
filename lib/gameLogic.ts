@@ -71,7 +71,8 @@ export function submitGuess(
   const newChain = [...state.chain, guessedPlayer];
   const isComplete =
     guessedPlayer.id === endPlayer.id ||
-    guessedPlayer.name.toLowerCase() === endPlayer.name.toLowerCase();
+    guessedPlayer.name.toLowerCase() === endPlayer.name.toLowerCase() ||
+    wereTeammates(guessedPlayer, endPlayer);
 
   if (isComplete) {
     const linksUsed = newChain.length - 1; // links = edges, not nodes
