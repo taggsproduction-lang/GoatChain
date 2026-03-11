@@ -79,7 +79,7 @@ export default function GuessInput({ onGuess, disabled, currentPlayerName, devic
       </div>
 
       {suggestions.length > 0 && (
-        <ul className="absolute top-full mt-1 left-0 right-0 bg-gray-800 border border-gray-600 rounded-lg overflow-hidden z-50 shadow-xl">
+        <ul className={`absolute left-0 right-0 bg-gray-800 border border-gray-600 rounded-lg overflow-hidden z-50 shadow-xl ${isMobile ? "bottom-full mb-1" : "top-full mt-1"}`}>
           {suggestions.map((name, i) => (
             <li
               key={name}
