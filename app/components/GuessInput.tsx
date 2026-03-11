@@ -49,7 +49,23 @@ export default function GuessInput({ onGuess, disabled, currentPlayerName, devic
   }
 
   return (
-    <div className={`relative w-full ${isMobile ? "px-2" : "max-w-md"}`}>
+    <div className={`w-full ${isMobile ? "px-2" : "relative max-w-md"}`}>
+      {/* Mobile: suggestions rendered above input, inline (not absolute) */}
+      {isMobile && suggestions.length > 0 && (
+        <ul className="w-full bg-gray-800 border border-gray-600 rounded-lg overflow-hidden shadow-xl mb-2">
+          {suggestions.map((name, i) => (
+            <li
+              key={name}
+              onMouseDown={(e) => { e.preventDefault(); handleSubmit(name); }}
+              className="px-4 py-4 flex items-center justify-between text-white hover:bg-gray-700 active:bg-gray-600 cursor-pointer text-base border-b border-gray-700 last:border-0"
+            >
+              <span>{name}</span>
+              <span className="text-gray-400 text-xs ml-3">{suggestionMeta[i]}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+
       <div className={`text-gray-400 mb-2 text-center ${isMobile ? "text-sm" : "text-xs"}`}>
         Who played with{" "}
         <span className="text-white font-semibold">{currentPlayerName}</span>?
@@ -78,14 +94,14 @@ export default function GuessInput({ onGuess, disabled, currentPlayerName, devic
         </button>
       </div>
 
-      {suggestions.length > 0 && (
-        <ul className={`absolute left-0 right-0 bg-gray-800 border border-gray-600 rounded-lg overflow-hidden z-50 shadow-xl ${isMobile ? "bottom-full mb-1" : "top-full mt-1"}`}>
+      {/* Desktop: absolute dropdown below input */}
+      {!isMobile && suggestions.length > 0 && (
+        <ul className="absolute top-full mt-1 left-0 right-0 bg-gray-800 border border-gray-600 rounded-lg overflow-hidden z-50 shadow-xl">
           {suggestions.map((name, i) => (
             <li
               key={name}
               onMouseDown={(e) => { e.preventDefault(); handleSubmit(name); }}
-              className={`px-4 flex items-center justify-between text-white hover:bg-gray-700 active:bg-gray-600 cursor-pointer
-                ${isMobile ? "py-4 text-base border-b border-gray-700 last:border-0" : "py-2 text-sm"}`}
+              className="px-4 py-2 flex items-center justify-between text-white hover:bg-gray-700 active:bg-gray-600 cursor-pointer text-sm"
             >
               <span>{name}</span>
               <span className="text-gray-400 text-xs ml-3">{suggestionMeta[i]}</span>
