@@ -903,6 +903,11 @@ export function wereTeammates(playerA: Player, playerB: Player): boolean {
 
 export function findPlayerByName(name: string): Player | null {
   const normalized = name.toLowerCase().trim();
+  // Prefer manual PLAYERS so bookend IDs match for puzzle completion
+  const manual = Object.values(PLAYERS).find(
+    (p) => p.name.toLowerCase() === normalized
+  );
+  if (manual) return manual;
   return (
     ALL_PLAYERS.find(
       (p) =>
