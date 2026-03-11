@@ -8,18 +8,25 @@ interface Props {
   isStart?: boolean;
   isEnd?: boolean;
   device: DeviceType;
+  onClick?: () => void;
+  pulse?: boolean;
 }
 
-export default function PlayerCard({ player, showTeams, isStart, isEnd, device }: Props) {
+export default function PlayerCard({ player, showTeams, isStart, isEnd, device, onClick, pulse }: Props) {
   const isMobile = device === "mobile";
+  const isClickable = !!onClick;
 
   return (
-    <div className={`rounded-xl border-2 text-center
-      ${isMobile ? "w-full px-4 py-3" : "min-w-[160px] max-w-[200px] px-4 py-4"}
-      ${isStart || isEnd ? "border-yellow-400 bg-yellow-950/30" : "border-green-500 bg-green-950/30"}`}
+    <div
+      onClick={onClick}
+      className={`rounded-xl border-2 text-center
+        ${isMobile ? "w-full px-4 py-3" : "min-w-[160px] max-w-[200px] px-4 py-4"}
+        ${isStart || isEnd ? "border-yellow-400 bg-yellow-950/30" : "border-green-500 bg-green-950/30"}
+        ${isClickable ? "cursor-pointer hover:brightness-125 active:scale-95 transition-all" : ""}
+        ${pulse ? "animate-pulse" : ""}`}
     >
       <div className="text-xs font-bold uppercase tracking-widest mb-1 text-gray-400">
-        {isStart ? "START" : isEnd ? "END" : "✅"}
+        {isStart ? (isClickable ? "TAP TO START" : "START") : isEnd ? (isClickable ? "TAP TO FINISH" : "END") : "✅"}
       </div>
       <div className={`font-bold text-white leading-tight ${isMobile ? "text-base" : "text-sm"}`}>
         {player.name}

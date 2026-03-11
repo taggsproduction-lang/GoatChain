@@ -15,6 +15,7 @@ export default function Home() {
   const [game, setGame] = useState<GameState>(() =>
     initGame(puzzle.startPlayer, puzzle.endPlayer)
   );
+  const [started, setStarted] = useState(false);
   const [easyMode, setEasyMode] = useState(false);
   const [lastMessage, setLastMessage] = useState("");
   const [showResult, setShowResult] = useState(false);
@@ -25,7 +26,7 @@ export default function Home() {
       setLastMessage(`"${name}" not found. Check spelling or try autocomplete.`);
       return;
     }
-    if (game.chain.some((p) => p.id === player.id)) {
+    if (game.chain.some((p) => p.id === player.id || p.name.toLowerCase() === player.name.toLowerCase())) {
       setLastMessage(`${player.name} is already in your chain.`);
       return;
     }
@@ -35,6 +36,10 @@ export default function Home() {
     if (newState.isComplete || newState.isStrikeout) {
       setTimeout(() => setShowResult(true), 600);
     }
+  }
+
+  function handleEndPlayerClick() {
+    handleGuess(puzzle.endPlayer.name);
   }
 
   function handleAbsChallenge() {
@@ -53,27 +58,20 @@ export default function Home() {
       {/* Baseball field underlay */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden>
         <svg viewBox="0 0 800 800" className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(100vw,100vh)] h-[min(100vw,100vh)] opacity-[0.04]" fill="none" xmlns="http://www.w3.org/2000/svg">
-          {/* Outfield arc */}
           <path d="M 150 650 A 370 370 0 0 1 650 650" stroke="white" strokeWidth="2"/>
-          {/* Foul lines */}
           <line x1="400" y1="660" x2="150" y2="650" stroke="white" strokeWidth="1.5"/>
           <line x1="400" y1="660" x2="650" y2="650" stroke="white" strokeWidth="1.5"/>
-          {/* Infield diamond */}
           <polygon points="400,260 540,400 400,540 260,400" stroke="white" strokeWidth="2"/>
-          {/* Pitcher's mound circle */}
           <circle cx="400" cy="400" r="18" stroke="white" strokeWidth="1.5"/>
-          {/* Home plate */}
           <polygon points="400,540 415,555 415,570 385,570 385,555" stroke="white" strokeWidth="1.5"/>
-          {/* Base dots */}
           <rect x="393" y="253" width="14" height="14" stroke="white" strokeWidth="1.5"/>
           <rect x="533" y="393" width="14" height="14" stroke="white" strokeWidth="1.5"/>
           <rect x="253" y="393" width="14" height="14" stroke="white" strokeWidth="1.5"/>
-          {/* Infield arc */}
           <path d="M 260 400 A 195 195 0 0 0 540 400" stroke="white" strokeWidth="1" strokeDasharray="4 4"/>
-          {/* Baseball seams hint */}
           <circle cx="400" cy="400" r="320" stroke="white" strokeWidth="1" strokeDasharray="2 8"/>
         </svg>
       </div>
+
       {/* Header */}
       <div className={`text-center ${isMobile ? "px-4" : ""}`}>
         <h1 className={`font-black tracking-tight text-yellow-400 ${isMobile ? "text-2xl" : "text-3xl"}`}>
@@ -107,7 +105,6 @@ export default function Home() {
           <div className="text-gray-500 text-xs uppercase tracking-wider">Smallest Chain</div>
         </div>
 
-        {/* Easy Mode toggle in stats bar on mobile */}
         {isMobile && (
           <button
             onClick={() => setEasyMode((v) => !v)}
@@ -139,6 +136,10 @@ export default function Home() {
           endPlayer={puzzle.endPlayer}
           easyMode={easyMode}
           device={device}
+          started={started}
+          isOver={isOver}
+          onStartClick={() => setStarted(true)}
+          onEndClick={handleEndPlayerClick}
         />
       </div>
 
@@ -155,8 +156,8 @@ export default function Home() {
         </div>
       )}
 
-      {/* Guess Input — desktop only (mobile uses fixed bottom bar) */}
-      {!isOver && !isMobile && (
+      {/* Guess Input — desktop only */}
+      {started && !isOver && !isMobile && (
         <div className="max-w-md w-full">
           <GuessInput
             onGuess={handleGuess}
@@ -168,7 +169,7 @@ export default function Home() {
       )}
 
       {/* ABS Challenge — desktop only */}
-      {!isOver && !isMobile && game.foulBalls > 0 && (
+      {started && !isOver && !isMobile && game.foulBalls > 0 && (
         <button
           onClick={handleAbsChallenge}
           className="text-blue-400 hover:text-blue-300 underline text-xs"
@@ -177,8 +178,8 @@ export default function Home() {
         </button>
       )}
 
-      {/* Fixed bottom input on mobile for easy thumb reach */}
-      {isMobile && !isOver && (
+      {/* Fixed bottom input on mobile */}
+      {isMobile && started && !isOver && (
         <div className="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-700 px-4 py-3 z-10">
           <GuessInput
             onGuess={handleGuess}

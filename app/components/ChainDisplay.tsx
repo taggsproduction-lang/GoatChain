@@ -9,19 +9,22 @@ interface Props {
   endPlayer: Player;
   easyMode: boolean;
   device: DeviceType;
+  started: boolean;
+  isOver: boolean;
+  onStartClick: () => void;
+  onEndClick: () => void;
 }
 
-export default function ChainDisplay({ chain, endPlayer, easyMode, device }: Props) {
+export default function ChainDisplay({ chain, endPlayer, easyMode, device, started, isOver, onStartClick, onEndClick }: Props) {
   const isMobile = device === "mobile";
-  const chainComplete = chain[chain.length - 1]?.id === endPlayer.id;
+  const chainComplete = isOver && chain.some(p => p.name.toLowerCase() === endPlayer.name.toLowerCase());
 
   if (isMobile) {
-    // Mobile: vertical stack with down arrows
     return (
       <div className="flex flex-col items-stretch gap-1 w-full px-2">
         {chain.map((player, i) => {
           const isStart = i === 0;
-          const isEnd = player.id === endPlayer.id;
+          const isEnd = player.name.toLowerCase() === endPlayer.name.toLowerCase();
           const prev = chain[i - 1];
           const shared = prev ? getSharedTeams(prev, player) : [];
 
@@ -35,7 +38,14 @@ export default function ChainDisplay({ chain, endPlayer, easyMode, device }: Pro
                   )}
                 </div>
               )}
-              <PlayerCard player={player} showTeams={easyMode} isStart={isStart} isEnd={isEnd} device={device} />
+              <PlayerCard
+                player={player}
+                showTeams={easyMode}
+                isStart={isStart}
+                isEnd={isEnd}
+                device={device}
+                onClick={isStart && !started ? onStartClick : undefined}
+              />
             </div>
           );
         })}
@@ -43,19 +53,25 @@ export default function ChainDisplay({ chain, endPlayer, easyMode, device }: Pro
         {!chainComplete && (
           <div className="flex flex-col items-center gap-1">
             <div className="text-gray-500 text-xl">↓ ??? ↓</div>
-            <PlayerCard player={endPlayer} showTeams={easyMode} isEnd device={device} />
+            <PlayerCard
+              player={endPlayer}
+              showTeams={easyMode}
+              isEnd
+              device={device}
+              onClick={started && !isOver ? onEndClick : undefined}
+              pulse={started && !isOver}
+            />
           </div>
         )}
       </div>
     );
   }
 
-  // Desktop: horizontal row with right arrows
   return (
     <div className="flex flex-wrap items-start justify-center gap-2">
       {chain.map((player, i) => {
         const isStart = i === 0;
-        const isEnd = player.id === endPlayer.id;
+        const isEnd = player.name.toLowerCase() === endPlayer.name.toLowerCase();
         const prev = chain[i - 1];
         const shared = prev ? getSharedTeams(prev, player) : [];
 
@@ -71,7 +87,14 @@ export default function ChainDisplay({ chain, endPlayer, easyMode, device }: Pro
                 )}
               </div>
             )}
-            <PlayerCard player={player} showTeams={easyMode} isStart={isStart} isEnd={isEnd} device={device} />
+            <PlayerCard
+              player={player}
+              showTeams={easyMode}
+              isStart={isStart}
+              isEnd={isEnd}
+              device={device}
+              onClick={isStart && !started ? onStartClick : undefined}
+            />
           </div>
         );
       })}
@@ -79,7 +102,14 @@ export default function ChainDisplay({ chain, endPlayer, easyMode, device }: Pro
       {!chainComplete && (
         <div className="flex items-center gap-2">
           <div className="text-gray-500 text-lg pt-4">→ ??? →</div>
-          <PlayerCard player={endPlayer} showTeams={easyMode} isEnd device={device} />
+          <PlayerCard
+            player={endPlayer}
+            showTeams={easyMode}
+            isEnd
+            device={device}
+            onClick={started && !isOver ? onEndClick : undefined}
+            pulse={started && !isOver}
+          />
         </div>
       )}
     </div>
