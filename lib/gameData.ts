@@ -923,13 +923,15 @@ export const PUZZLES: Puzzle[] = [
   {
     id: "puzzle-1",
     date: "2026-03-11",
-    startPlayer: PLAYERS["aaron-judge"],
-    endPlayer: PLAYERS["manny-ramirez"],
-    par: 2,
+    startPlayer: PLAYERS["pete-rose"],
+    endPlayer: PLAYERS["aaron-judge"],
+    par: 4,
     optimalPath: [
+      "Pete Rose",
+      "Eric Davis",
+      "Mike Mussina",
+      "Alex Rodriguez",
       "Aaron Judge",
-      "Jacoby Ellsbury",
-      "Manny Ramirez",
     ],
   },
   {
