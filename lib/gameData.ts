@@ -880,9 +880,13 @@ try {
   // players-data.json not yet generated — fall back to manual PLAYERS above
 }
 
-// Merged lookup: extended DB takes priority, manual PLAYERS fills gaps
+// Merged: manual PLAYERS take priority (correct names/data), extended fills the rest
+const manualNames = new Set(Object.values(PLAYERS).map((p) => p.name.toLowerCase()));
 export const ALL_PLAYERS: Player[] = EXTENDED_PLAYERS.length > 0
-  ? EXTENDED_PLAYERS
+  ? [
+      ...Object.values(PLAYERS),
+      ...EXTENDED_PLAYERS.filter((p) => !manualNames.has(p.name.toLowerCase())),
+    ]
   : Object.values(PLAYERS);
 
 // ─── Teammate Validation ──────────────────────────────────────────────────────

@@ -12,10 +12,10 @@ const fs = require("fs");
 const path = require("path");
 
 const OUTPUT_FILE = path.join(__dirname, "..", "lib", "players-data.json");
-const START_YEAR = 1990;
+const START_YEAR = 1950;
 const END_YEAR = 2024;
 const ELITE_GAMES = 500; // flag as bookend-eligible
-const CONCURRENCY = 10; // parallel requests
+const CONCURRENCY = 20; // parallel requests
 
 // All 30 MLB teams with their stable IDs
 const TEAMS = [
