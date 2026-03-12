@@ -953,7 +953,7 @@ export const PUZZLES: Puzzle[] = [
   },
   {
     id: "puzzle-3",
-    date: "2026-03-13",
+    date: "2026-03-14",
     startPlayer: PLAYERS["randy-johnson"],
     endPlayer: PLAYERS["gerrit-cole"],
     par: 3,
@@ -966,21 +966,6 @@ export const PUZZLES: Puzzle[] = [
   },
   {
     id: "puzzle-4",
-    date: "2026-03-14",
-    startPlayer: PLAYERS["pete-rose"],
-    endPlayer: PLAYERS["bryce-harper"],
-    par: 5,
-    optimalPath: [
-      "Pete Rose",
-      "Eric Davis",
-      "Barry Larkin",
-      "Jose Guillen",
-      "Ryan Zimmerman",
-      "Bryce Harper",
-    ],
-  },
-  {
-    id: "puzzle-5",
     date: "2026-03-15",
     startPlayer: PLAYERS["nolan-ryan"],
     endPlayer: PLAYERS["clayton-kershaw"],
@@ -990,6 +975,87 @@ export const PUZZLES: Puzzle[] = [
       "Ivan Rodriguez",
       "Jayson Werth",
       "Clayton Kershaw",
+    ],
+  },
+  {
+    // McCutchen (SF 2018) → Bumgarner (SF 2009-19) → Johnson (SF 2009)
+    id: "puzzle-5",
+    date: "2026-03-16",
+    startPlayer: PLAYERS["andrew-mccutchen"],
+    endPlayer: PLAYERS["randy-johnson"],
+    par: 2,
+    optimalPath: [
+      "Andrew McCutchen",
+      "Madison Bumgarner",
+      "Randy Johnson",
+    ],
+  },
+  {
+    // Bonds (SF 1997-2002) → Kent (SF 1997-2002) → Kershaw (LAD 2008, Kent LAD 2005-08)
+    id: "puzzle-6",
+    date: "2026-03-17",
+    startPlayer: PLAYERS["barry-bonds"],
+    endPlayer: PLAYERS["clayton-kershaw"],
+    par: 2,
+    optimalPath: [
+      "Barry Bonds",
+      "Jeff Kent",
+      "Clayton Kershaw",
+    ],
+  },
+  {
+    // Manny (BOS 2007-08) → Ellsbury (BOS 2007-13) → Jeter (NYY 2014, Ellsbury NYY 2014-17)
+    id: "puzzle-7",
+    date: "2026-03-18",
+    startPlayer: PLAYERS["manny-ramirez"],
+    endPlayer: PLAYERS["derek-jeter"],
+    par: 2,
+    optimalPath: [
+      "Manny Ramirez",
+      "Jacoby Ellsbury",
+      "Derek Jeter",
+    ],
+  },
+  {
+    // Posey (SF 2018) → McCutchen (SF 2018, NYY 2018) → Judge (NYY 2018)
+    id: "puzzle-8",
+    date: "2026-03-19",
+    startPlayer: PLAYERS["buster-posey"],
+    endPlayer: PLAYERS["aaron-judge"],
+    par: 2,
+    optimalPath: [
+      "Buster Posey",
+      "Andrew McCutchen",
+      "Aaron Judge",
+    ],
+  },
+  {
+    // Ortiz (BOS 2010) → Beltre (BOS 2010) → Beltre (TEX 2011-12) → Hamilton (TEX 2011-12) → Hamilton (LAA 2013-14) → Trout (LAA)
+    id: "puzzle-9",
+    date: "2026-03-20",
+    startPlayer: PLAYERS["david-ortiz"],
+    endPlayer: PLAYERS["mike-trout"],
+    par: 3,
+    optimalPath: [
+      "David Ortiz",
+      "Adrian Beltre",
+      "Josh Hamilton",
+      "Mike Trout",
+    ],
+  },
+  {
+    // Rose (CIN 1986) → Larkin (CIN 1986-2004) → Guillen (CIN 2000-03) → Zimmerman (WSN 2005-19) → Harper (WSN 2012-18)
+    id: "puzzle-10",
+    date: "2026-03-21",
+    startPlayer: PLAYERS["pete-rose"],
+    endPlayer: PLAYERS["bryce-harper"],
+    par: 4,
+    optimalPath: [
+      "Pete Rose",
+      "Barry Larkin",
+      "Jose Guillen",
+      "Ryan Zimmerman",
+      "Bryce Harper",
     ],
   },
 ];
