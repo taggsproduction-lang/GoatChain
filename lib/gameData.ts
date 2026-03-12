@@ -926,7 +926,7 @@ export function findPlayerByName(name: string): Player | null {
 export const PUZZLES: Puzzle[] = [
   {
     id: "puzzle-1",
-    date: "2026-03-12",
+    date: "2026-03-11",
     startPlayer: PLAYERS["pete-rose"],
     endPlayer: PLAYERS["aaron-judge"],
     par: 4,
@@ -940,7 +940,7 @@ export const PUZZLES: Puzzle[] = [
   },
   {
     id: "puzzle-2",
-    date: "2026-03-13",
+    date: "2026-03-12",
     startPlayer: PLAYERS["mike-trout"],
     endPlayer: PLAYERS["ken-griffey-jr"],
     par: 3,
@@ -1061,6 +1061,6 @@ export const PUZZLES: Puzzle[] = [
 ];
 
 export function getTodaysPuzzle(): Puzzle {
-  const today = new Date().toISOString().split("T")[0];
+  const today = new Date().toLocaleDateString("en-CA", { timeZone: "America/New_York" });
   return PUZZLES.find((p) => p.date === today) ?? PUZZLES[0];
 }
