@@ -926,7 +926,7 @@ export function findPlayerByName(name: string): Player | null {
 export const PUZZLES: Puzzle[] = [
   {
     id: "puzzle-1",
-    date: "2026-03-11",
+    date: "2026-03-12",
     startPlayer: PLAYERS["pete-rose"],
     endPlayer: PLAYERS["aaron-judge"],
     par: 4,
@@ -940,7 +940,7 @@ export const PUZZLES: Puzzle[] = [
   },
   {
     id: "puzzle-2",
-    date: "2026-03-12",
+    date: "2026-03-13",
     startPlayer: PLAYERS["mike-trout"],
     endPlayer: PLAYERS["ken-griffey-jr"],
     par: 3,
