@@ -27,6 +27,11 @@ export default function ChainDisplay({ chain, endPlayer, easyMode, device, start
           const isEnd = player.name.toLowerCase() === endPlayer.name.toLowerCase();
           const prev = chain[i - 1];
           const shared = prev ? getSharedTeams(prev, player) : [];
+          const collapsed = !isOver && !isStart && !isEnd && i < chain.length - 1;
+
+          if (collapsed) {
+            return <div key={i} className="h-3 w-full bg-green-600 rounded-full" />;
+          }
 
           return (
             <div key={i} className="flex flex-col items-center gap-1">
@@ -69,12 +74,17 @@ export default function ChainDisplay({ chain, endPlayer, easyMode, device, start
   }
 
   return (
-    <div className="flex flex-wrap items-start justify-center gap-2">
+    <div className="flex flex-wrap items-center justify-center gap-2">
       {chain.map((player, i) => {
         const isStart = i === 0;
         const isEnd = player.name.toLowerCase() === endPlayer.name.toLowerCase();
         const prev = chain[i - 1];
         const shared = prev ? getSharedTeams(prev, player) : [];
+        const collapsed = !isOver && !isStart && !isEnd && i < chain.length - 1;
+
+        if (collapsed) {
+          return <div key={i} className="w-3 h-20 bg-green-600 rounded-full self-center" />;
+        }
 
         return (
           <div key={i} className="flex items-start gap-2">
