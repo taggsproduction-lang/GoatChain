@@ -142,10 +142,24 @@ export const RESULT_LABELS: Record<AtBatResult, string> = {
   "in-progress": "",
 };
 
+// Normalize franchise name variations to a single canonical name
+function normalizeTeam(team: string): string {
+  const map: Record<string, string> = {
+    "California Angels": "Los Angeles Angels",
+    "Anaheim Angels": "Los Angeles Angels",
+    "Los Angeles Angels of Anaheim": "Los Angeles Angels",
+    "Florida Marlins": "Miami Marlins",
+    "Tampa Bay Devil Rays": "Tampa Bay Rays",
+    "Cleveland Indians": "Cleveland Guardians",
+    "Montreal Expos": "Washington Nationals",
+  };
+  return map[team] ?? team;
+}
+
 export function wereTeammates(a: Player, b: Player): boolean {
   for (const ta of a.teams) {
     for (const tb of b.teams) {
-      if (ta.team === tb.team) {
+      if (normalizeTeam(ta.team) === normalizeTeam(tb.team)) {
         const start = Math.max(ta.startYear, tb.startYear);
         const end = Math.min(ta.endYear, tb.endYear);
         if (start <= end) return true;
@@ -159,7 +173,7 @@ export function getSharedTeams(a: Player, b: Player): string[] {
   const shared: string[] = [];
   for (const ta of a.teams) {
     for (const tb of b.teams) {
-      if (ta.team === tb.team) {
+      if (normalizeTeam(ta.team) === normalizeTeam(tb.team)) {
         const start = Math.max(ta.startYear, tb.startYear);
         const end = Math.min(ta.endYear, tb.endYear);
         if (start <= end) {
