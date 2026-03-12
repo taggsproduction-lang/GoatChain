@@ -43,6 +43,7 @@ export default function ChainDisplay({ chain, endPlayer, easyMode, device, start
                 showTeams={easyMode}
                 isStart={isStart}
                 isEnd={isEnd}
+                isConfirmed={!isStart && !isEnd}
                 device={device}
                 onClick={isStart && !started ? onStartClick : undefined}
               />
@@ -92,6 +93,7 @@ export default function ChainDisplay({ chain, endPlayer, easyMode, device, start
               showTeams={easyMode}
               isStart={isStart}
               isEnd={isEnd}
+              isConfirmed={!isStart && !isEnd}
               device={device}
               onClick={isStart && !started ? onStartClick : undefined}
             />
